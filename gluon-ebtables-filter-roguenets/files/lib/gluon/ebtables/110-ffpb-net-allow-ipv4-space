@@ -1,0 +1,2 @@
+rule 'FFPB_NET_ONLY -p IPv4 --ip-src 10.132.0.0/17 -j RETURN'
+rule 'FFPB_NET_ONLY -p ARP --arp-ip-src 10.132.0.0/17 -j RETURN'
