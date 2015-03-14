@@ -1,4 +1,4 @@
 rule 'FFPB_NET_ONLY -p IPv4 --ip-protocol udp --ip-destination-port 67 -j RETURN'
 rule 'FFPB_NET_ONLY -p IPv4 --ip-src 10.132.0.0/17 -j RETURN'
 rule 'FFPB_NET_ONLY -p ARP --arp-ip-src 10.132.0.0/17 --arp-ip-dst 10.132.0.0/17 -j RETURN'
-rule 'FFPB_NET_ONLY -p ARP --arp-ip-src 0.0.0.0./0 --arp-ip-dst 10.132.0.0/17 -j RETURN'
+rule 'FFPB_NET_ONLY -p ARP --arp-ip-src 0.0.0.0/0 --arp-ip-dst 10.132.0.0/17 -j RETURN'
