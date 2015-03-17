@@ -37,6 +37,7 @@ endef
 define Package/ffpb-ebtables-net-rules/install
 	$(INSTALL_DIR) $(1)/lib/gluon/ebtables/
 	$(CP) ./files/lib/gluon/ebtables/100-ffpb-net-chain $(1)/lib/gluon/ebtables/
+	$(CP) ./files/lib/gluon/ebtables/110-ffpb-suppress-bogus-arprequests $(1)/lib/gluon/ebtables/
 	$(CP) ./files/lib/gluon/ebtables/110-ffpb-net-allow-ipv4-space $(1)/lib/gluon/ebtables/
 	$(CP) ./files/lib/gluon/ebtables/110-ffpb-net-allow-ipv6-spaces $(1)/lib/gluon/ebtables/
 	$(CP) ./files/lib/gluon/ebtables/400-add-ffpb-net-chain $(1)/lib/gluon/ebtables/
