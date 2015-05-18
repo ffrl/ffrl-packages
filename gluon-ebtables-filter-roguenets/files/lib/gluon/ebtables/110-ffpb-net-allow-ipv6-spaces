@@ -1,5 +1,19 @@
-rule 'FFPB_NET_ONLY -p IPv6 --ip6-src fe80::/10 -j RETURN'
-rule 'FFPB_NET_ONLY -p IPv6 --ip6-dst ff00::/8 -j RETURN'
-rule 'FFPB_NET_ONLY -p IPv6 --ip6-src fdca:ffee:ff12:132::/64 -j RETURN'
-rule 'FFPB_NET_ONLY -p IPv6 --ip6-src 2001:470:6d:860::/64 -j RETURN'
-rule 'FFPB_NET_ONLY -p IPv6 --ip6-src 2a03:2260:113::/48 -j RETURN'
+siteConfig = require("gluon.site_config")
+
+-- iterate through lists
+function list_iter (_table)
+    local i = 0 
+    local n = table.getn(_table)
+    return function ()
+        i = i + 1 
+        if i <= n then return _table[i] end 
+    end 
+end
+
+rule ('FFPB_NET_ONLY -p IPv6 --ip6-src fe80::/10 -j RETURN')
+rule ('FFPB_NET_ONLY -p IPv6 --ip6-dst ff00::/8 -j RETURN')
+rule ('FFPB_NET_ONLY -p IPv6 --ip6-src ' .. siteConfig.prefix6 .. ' -j RETURN')
+
+for prefix in list_iter(siteConfig.additional_prefix6) do
+	rule ('FFPB_NET_ONLY -p IPv6 --ip6-src ' .. prefix .. ' -j RETURN')
+end
