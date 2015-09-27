@@ -1,1 +1,1 @@
-chain('FFPB_NET_ONLY', 'DROP') 
+chain('ROGUE_NET_FILTER', 'DROP') 

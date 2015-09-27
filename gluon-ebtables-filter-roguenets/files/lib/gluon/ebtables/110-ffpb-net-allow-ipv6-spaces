@@ -1,4 +1,5 @@
 siteConfig = require("gluon.site_config")
+prefix6 = siteConfig.roguenets_filter.allowed_prefix6
 
 -- iterate through lists
 function list_iter (_table)
@@ -10,10 +11,10 @@ function list_iter (_table)
     end 
 end
 
-rule ('FFPB_NET_ONLY -p IPv6 --ip6-src fe80::/10 -j RETURN')
-rule ('FFPB_NET_ONLY -p IPv6 --ip6-dst ff00::/8 -j RETURN')
-rule ('FFPB_NET_ONLY -p IPv6 --ip6-src ' .. siteConfig.prefix6 .. ' -j RETURN')
+rule ('ROGUE_NET_FILTER -p IPv6 --ip6-src fe80::/10 -j RETURN')
+rule ('ROGUE_NET_FILTER -p IPv6 --ip6-dst ff00::/8 -j RETURN')
+rule ('ROGUE_NET_FILTER -p IPv6 --ip6-src ' .. prefix6 .. ' -j RETURN')
 
-for prefix in list_iter(siteConfig.additional_prefix6) do
-	rule ('FFPB_NET_ONLY -p IPv6 --ip6-src ' .. prefix .. ' -j RETURN')
+for prefix in list_iter(siteConfig.roguenets_filter.additional_prefix6) do
+	rule ('ROGUE_NET_FILTER -p IPv6 --ip6-src ' .. prefix .. ' -j RETURN')
 end
