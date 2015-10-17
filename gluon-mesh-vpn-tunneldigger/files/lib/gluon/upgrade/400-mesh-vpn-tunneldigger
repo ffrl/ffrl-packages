@@ -10,15 +10,15 @@ local lutil = require 'luci.util'
 -- Group for iptables rule
 users.add_group('gluon-tunneldigger', 900)
 
-local fastd_enabled = tonumber(uci:get('fastd', 'mesh_vpn', 'enabled'))
-local tunneldigger_enabled = tonumber(uci:get_first('tunneldigger', 'broker', 'enabled'))
+local fastd_enabled = uci:get('fastd', 'mesh_vpn', 'enabled')
+local tunneldigger_enabled = uci:get_first('tunneldigger', 'broker', 'enabled')
 
 if not fastd_enabled then fastd_enabled = 0 end
 if not tunneldigger_enabled then tunneldigger_enabled = 0 end
 
 local enabled = 1
 
-if ( fastd_enabled == 0 and tunneldigger_enabled == 0 ) then
+if ( tonumber(fastd_enabled) == 0 and tonumber(tunneldigger_enabled) == 0 ) then
         enabled = 0
 end
 
