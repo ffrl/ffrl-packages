@@ -1,0 +1,59 @@
+#!/usr/bin/lua
+
+site = require("gluon.site_config")
+uci = require('luci.model.uci').cursor()
+
+local interface24 = false
+local interface50 = false
+if uci:get('wireless', 'radio0', 'hwmode') then
+	hwmode = uci:get('wireless', 'radio0', 'hwmode')
+	if hwmode == '11ng' then
+		interface24 = 'radio0'
+		hwmodeR1 = uci:get('wireless', 'radio1', 'hwmode')
+		if hwmodeR1 == '11na' then
+			interface50 = 'radio1'
+		elseif hwmodeR1 == '11a' then
+			interface50 = 'radio1'
+		end
+	elseif hwmode == '11g' then
+		interface24 = 'radio0'
+		hwmodeR1 = uci:get('wireless', 'radio1', 'hwmode')
+		if hwmodeR1 == '11na' then
+			interface50 = 'radio1'
+		elseif hwmodeR1 == '11a' then
+			interface50 = 'radio1'
+		end
+	elseif hwmode == '11na' then
+		interface50 = 'radio0'
+		hwmodeR1 = uci:get('wireless', 'radio1', 'hwmode')
+		if hwmodeR1 == '11ng' then
+			interface24 = 'radio1'
+		elseif hwmodeR1 == '11g' then
+			interface24 = 'radio1'
+		end
+	elseif hwmode == '11a' then
+		interface50 = 'radio0'
+		hwmodeR1 = uci:get('wireless', 'radio1', 'hwmode')
+		if hwmodeR1 == '11ng' then
+			interface24 = 'radio1'
+		elseif hwmodeR1 == '11g' then
+			interface24 = 'radio1'
+		end
+	else
+		os.exit(0) -- something went wrong
+	end
+end
+
+if interface24 then
+	uci:set('wireless', interface24, 'country', '00')
+	uci:set('wireless', interface24, 'txpower', '20')
+	uci:save('wireless')
+	uci:commit('wireless')
+end
+
+if interface50 then
+	uci:set('wireless', interface50, 'country', '00')
+	uci:set('wireless', interface50, 'txpower', '23')
+	uci:save('wireless')
+	uci:commit('wireless')
+end
