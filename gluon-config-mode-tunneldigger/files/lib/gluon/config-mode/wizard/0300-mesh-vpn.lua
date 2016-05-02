@@ -56,7 +56,7 @@ function M.handle(data)
       uci:set("gluon-simple-tc", "mesh_vpn", "limit_egress", data._limit_egress)
     end
 
-    uci:commit("gluon-simple-tc")
+    uci:save("gluon-simple-tc")
     uci:commit("gluon-simple-tc")
   end
 end
