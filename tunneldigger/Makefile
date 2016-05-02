@@ -2,8 +2,8 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=tunneldigger
 PKG_VERSION:=0.4.5
-PKG_RELEASE:=1
-PKG_REV:=f820d65e57098094231083c2e83ed4983d2be049
+PKG_RELEASE:=3
+PKG_REV:=8788ea702d6afbf430596c6fd9a6da55bb5bcb25
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=git://github.com/ffrl/tunneldigger.git
