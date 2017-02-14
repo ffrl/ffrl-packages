@@ -15,6 +15,12 @@ if (tonumber(enabled) == 0) then
   enabled = site.tunneldigger_mesh_vpn.enabled and 1 or 0
 end
 
+-- Check if FastD was enabled
+local enabled = uci:get('fastd', 'mesh_vpn', 'enabled')
+if not enabled then
+  enabled = site.tunneldigger_mesh_vpn.enabled and 1 or 0
+end
+
 -- Delete old broker config section       
 uci:delete_all('tunneldigger', 'broker')
 
