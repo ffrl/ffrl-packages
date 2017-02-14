@@ -5,7 +5,7 @@ PKG_VERSION:=3
 
 PKG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
 
-include $(GLUONDIR)/include/package.mk
+include $(INCLUDE_DIR)/package.mk
 
 define Package/gluon-tunneldigger-watchdog
   SECTION:=gluon
