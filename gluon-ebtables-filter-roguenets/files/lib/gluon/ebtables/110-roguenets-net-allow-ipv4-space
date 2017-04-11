@@ -1,7 +1,0 @@
-siteConfig = require("gluon.site_config")
-prefix4 = siteConfig.roguenets_filter.allowed_prefix4
-
-rule ('ROGUE_NET_FILTER -p IPv4 --ip-src ' .. prefix4 .. ' -j RETURN')
-rule ('ROGUE_NET_FILTER -p ARP --arp-ip-src ' .. prefix4 .. ' --arp-ip-dst ' .. prefix4 .. ' -j RETURN')
-rule ('ROGUE_NET_FILTER -p IPv4 --ip-protocol udp --ip-destination-port 67 -j RETURN')
-rule ('ROGUE_NET_FILTER -p ARP --arp-ip-src 0.0.0.0/0 --arp-ip-dst ' .. prefix4 .. ' -j RETURN')
